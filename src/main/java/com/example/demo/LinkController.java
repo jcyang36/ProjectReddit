@@ -22,7 +22,7 @@ public class LinkController {
 
     @RequestMapping("/")
     public String home( Model model) {
-        Iterable<Link> linkList = linkRepository.findAll();
+        Iterable<Link> linkList = linkRepository.findAllOrderedByTime();
         model.addAttribute("linkList", linkList);
 
         return "index";
@@ -34,21 +34,26 @@ public class LinkController {
         return "Add";
     }
 
+    @RequestMapping("/usersubmissions")
+    public String goUserSubmission( Model model) {
+        Iterable<Link> linkListUser = linkRepository.findAllByUser("Zack");
+        model.addAttribute("linkListUser", linkListUser);
+        return "Usersubmissions";
+    }
+
     @PostMapping("/addsubmit")
     public String addSubmit(@ModelAttribute Link link, Model model) {
+        link.setTime(new Date());
         model.addAttribute(new Link());
-    linkRepository.save(link);
-        Iterable<Link> linkList = linkRepository.findAll();
+        linkRepository.save(link);
+        Iterable<Link> linkList = linkRepository.findAllOrderedByTime();
         model.addAttribute("linkList", linkList);
 
         return "index";
     }
 
-    public static String getDate(){
-        SimpleDateFormat dateFormatter = new SimpleDateFormat("MM-dd-yy 'at' hh:mm ");
-        Calendar cal = Calendar.getInstance();
-        Date now = cal.getTime();
-
-        return dateFormatter.format(now);
+    @RequestMapping("/login")
+    public String login() {
+        return "login";
     }
 }

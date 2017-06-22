@@ -5,6 +5,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
+import java.util.Date;
 
 /**
  * Created by student on 6/21/17.
@@ -19,7 +20,7 @@ public class Link {
     @NotNull
     private String url;
     private String user;
-    private String time;
+    private Date time;
     public int getId() {
         return id;
     }
@@ -52,11 +53,11 @@ public class Link {
         this.user = user;
     }
 
-    public String getTime() {
+    public Date getTime() {
         return time;
     }
 
-    public void setTime(String time) {
+    public void setTime(Date time) {
         this.time = time;
     }
     @Override
