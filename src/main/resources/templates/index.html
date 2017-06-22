@@ -43,5 +43,34 @@
     </div><!-- /.container-fluid -->
 </nav>
 
+<!--List   -->
+
+<div class = "container">
+
+
+<table>
+        <th height="80"> Title   </th>
+        <th></th>
+
+        <th height="80"> URL  </th>
+
+        <div th:each = "link: ${linkList}">
+            <tr>
+                <td th:text = " ${link.title+ ' '} " height="80"> Title</td>
+                <td> </td>
+            <td th:text = "${link.url} " height="80"> URL </td>
+            </tr>
+
+        </div>
+
+
+    </table>
+
+
+
+
+</div>
+
+
 </body>
 </html>

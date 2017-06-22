@@ -1,5 +1,6 @@
 package com.example.demo;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -12,9 +13,14 @@ import org.springframework.web.bind.annotation.ResponseBody;
  */
 @Controller
 public class LinkController {
+    @Autowired
+    private LinkRepository linkRepository;
 
     @RequestMapping("/")
     public String home( Model model) {
+        Iterable<Link> linkList = linkRepository.findAll();
+        model.addAttribute("linkList", linkList);
+
         return "index";
     }
 
@@ -25,9 +31,12 @@ public class LinkController {
     }
 
     @PostMapping("/addsubmit")
-    public @ResponseBody
-    String addSubmit(@ModelAttribute Link link) {
+    public String addSubmit(@ModelAttribute Link link, Model model) {
+        model.addAttribute(new Link());
+    linkRepository.save(link);
+        Iterable<Link> linkList = linkRepository.findAll();
+        model.addAttribute("linkList", linkList);
 
-        return link.toString();
+        return "index";
     }
 }
