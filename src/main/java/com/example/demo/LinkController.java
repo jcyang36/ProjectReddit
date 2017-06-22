@@ -7,6 +7,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Calendar;
+
 /**
  * Created by student on 6/22/17.
  */
@@ -29,5 +33,13 @@ public class LinkController {
     String addSubmit(@ModelAttribute Link link) {
 
         return link.toString();
+    }
+
+    public static String getDate(){
+        SimpleDateFormat dateFormatter = new SimpleDateFormat("MM-dd-yy 'at' hh:mm ");
+        Calendar cal = Calendar.getInstance();
+        Date now = cal.getTime();
+
+        return dateFormatter.format(now);
     }
 }
