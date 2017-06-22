@@ -49,18 +49,17 @@
 
 
 <table class="table">
-        <th height="80"> Title   </th>
+        <th height="80"> Links  </th>
 
 
-        <th height="80"> URL  </th>
+
 
         <div th:each = "link: ${linkList}">
             <tr>
-                <td th:text = " ${link.title+ '&nbsp;'+link.url} " height="80"> Title</td>
+                <td >  <a th:href =  "@{'https://'+${link.url} }"  th:utext = " ${link.title+'&lt;br/&gt;' + link.time} " height="80">Title  </a> </td>
 
-            <td th:text = "${link.url} " height="80"> URL </td>
 
-                <td th:text = "${link.time} " height="80"> URL </td>
+                <td th:text = "${link.time} " height="80"> Time </td>
             </tr>
 
         </div>
